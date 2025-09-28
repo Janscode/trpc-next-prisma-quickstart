@@ -59,11 +59,9 @@ pnpm dx
 
 ## Development
 
-### Start project
+Start the dev server
 
 ```bash
-pnpm create next-app --example https://github.com/trpc/trpc --example-path examples/next-prisma-starter trpc-prisma-starter
-cd trpc-prisma-starter
 pnpm dx
 ```
 
@@ -115,4 +113,4 @@ Go to [dashboard.render.com/blueprints](https://dashboard.render.com/blueprints)
 
 ---
 
-Created by [@alexdotjs](https://twitter.com/alexdotjs).
+Based on work by [@alexdotjs](https://twitter.com/alexdotjs).
