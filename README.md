@@ -14,7 +14,37 @@
 
 ## Setup
 
+You'll want pnpm, postgres, and node installed.
+
+For postgress:
+
 ```bash
+brew install postgresql
+brew services list
+#look at what the posgres service is called (something like posgtresql@14)
+brew services start <your-specific-posgres-version>
+
+```
+
+For node, I suggest using NVM
+
+```bash
+#todo: get the script in here
+```
+
+For pnpm,
+
+```bash
+npm install -g pnpm@latest-10
+```
+
+```bash
+psql postgres
+# in postgress:
+CREATE USER prisma WITH PASSWORD 'development' CREATEDB;
+CREATE DATABASE "next-prisma-starter-new" OWNER prisma;
+\q
+# back in bash:
 pnpm create next-app --example https://github.com/trpc/trpc --example-path examples/next-prisma-starter trpc-prisma-starter
 cd trpc-prisma-starter
 pnpm
@@ -25,6 +55,7 @@ pnpm dx
 
 - Node >= 18.0.0
 - Postgres
+- pnpm
 
 ## Development
 
@@ -33,7 +64,6 @@ pnpm dx
 ```bash
 pnpm create next-app --example https://github.com/trpc/trpc --example-path examples/next-prisma-starter trpc-prisma-starter
 cd trpc-prisma-starter
-pnpm
 pnpm dx
 ```
 
