@@ -9,7 +9,7 @@ const prisma = new PrismaClient();
 
 async function main() {
   const firstPostId = '5c03994c-fc16-47e0-bd02-d218a370a078';
-  await prisma.post.upsert({
+  await prisma.note.upsert({
     where: {
       id: firstPostId,
     },

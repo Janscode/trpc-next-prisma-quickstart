@@ -2,10 +2,11 @@ import { trpc } from '../utils/trpc';
 import type { NextPageWithLayout } from './_app';
 import type { inferProcedureInput } from '@trpc/server';
 import Link from 'next/link';
-import { Fragment } from 'react';
+import { Fragment, useState } from 'react';
 import type { AppRouter } from '~/server/routers/_app';
 
 const IndexPage: NextPageWithLayout = () => {
+  const [author, setAuthor] = useState('');
   const utils = trpc.useUtils();
   const postsQuery = trpc.post.list.useInfiniteQuery(
     {
@@ -112,6 +113,7 @@ const IndexPage: NextPageWithLayout = () => {
             const input: Input = {
               title: values.title as string,
               text: values.text as string,
+              author,
             };
             try {
               await addPost.mutateAsync(input);
@@ -131,6 +133,14 @@ const IndexPage: NextPageWithLayout = () => {
               placeholder="Title"
               disabled={addPost.isPending}
             />
+            <input
+              value={author}
+              onChange={(e) => setAuthor(e.target.value)}
+              name="author"
+              type="text"
+              placeholder="Author"
+              className="focus-visible:outline-dashed outline-offset-4 outline-2 outline-gray-700 rounded-xl px-4 py-3 bg-gray-900"
+            ></input>
             <textarea
               className="resize-none focus-visible:outline-dashed outline-offset-4 outline-2 outline-gray-700 rounded-xl px-4 py-3 bg-gray-900"
               id="text"

@@ -19,7 +19,8 @@ const defaultPostSelect = {
   text: true,
   createdAt: true,
   updatedAt: true,
-} satisfies Prisma.PostSelect;
+  author: true,
+} satisfies Prisma.NoteSelect;
 
 export const postRouter = router({
   list: publicProcedure
@@ -39,7 +40,7 @@ export const postRouter = router({
       const limit = input.limit ?? 50;
       const { cursor } = input;
 
-      const items = await prisma.post.findMany({
+      const items = await prisma.note.findMany({
         select: defaultPostSelect,
         // get an extra item at the end which we'll use as next cursor
         take: limit + 1,
@@ -74,7 +75,7 @@ export const postRouter = router({
     )
     .query(async ({ input }) => {
       const { id } = input;
-      const post = await prisma.post.findUnique({
+      const post = await prisma.note.findUnique({
         where: { id },
         select: defaultPostSelect,
       });
@@ -92,10 +93,11 @@ export const postRouter = router({
         id: z.string().uuid().optional(),
         title: z.string().min(1).max(32),
         text: z.string().min(1),
+        author: z.string().optional(),
       }),
     )
     .mutation(async ({ input }) => {
-      const post = await prisma.post.create({
+      const post = await prisma.note.create({
         data: input,
         select: defaultPostSelect,
       });

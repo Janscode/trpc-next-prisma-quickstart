@@ -19,6 +19,7 @@ function PostItem(props: { post: PostByIdOutput }) {
       <em className="text-gray-400">
         Created {post.createdAt.toLocaleDateString('en-us')}
       </em>
+      <em className="text-gray-400">Written by {post.author}</em>
 
       <p className="py-4 break-all">{post.text}</p>
 
